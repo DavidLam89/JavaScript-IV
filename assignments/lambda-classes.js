@@ -27,6 +27,10 @@ class Instructor extends Person {
     grade(student, subject) {
         console.log(`${student.name} receives a perfect score on ${subject}`)
     }
+    adjustgrade(student) {
+        student.grade = student.grade - (Math.round(Math.random()) * 2 - 1) * Math.round(Math.random() * 9 + 1);
+        console.log(`${this.name} adjusted ${student.name}'s grade, ${student.name}'s new grade is ${student.grade}`);
+    }
 }
 
 class Student extends Person {
@@ -35,6 +39,7 @@ class Student extends Person {
         this.previousBackground = attributes.previousBackground;
         this.className = attributes.className;
         this.favSubjects = attributes.favSubjects;
+        this.grade = attributes.grade;
     }
 
     listsSubjects() {
@@ -45,6 +50,9 @@ class Student extends Person {
     }
     sprintChallenge(subject) {
         console.log(`${this.name} has begun sprint challenge on ${subject}`)
+    }
+    graduate(){
+        this.grade >= 70 ? console.log(`Congratulations on ${this.name}'s graduation and best wishes for ${this.name}'s next adventure!`) : console.log(`${this.name} needs to try harder!!`); 
     }
 }
 
@@ -89,7 +97,8 @@ const virginia = new Student({
     gender: 'female',
     previousBackground: 'Medical student',
     className: 'WEB17',
-    favSubjects: ['Preprocessing', 'Flexbox']
+    favSubjects: ['Preprocessing', 'Flexbox'],
+    grade: 100
 });
 const neil = new Student({
     name: 'Neil',
@@ -98,7 +107,8 @@ const neil = new Student({
     gender: 'male',
     previousBackground: 'Auto mechanic',
     className: 'WEB17',
-    favSubjects: ['User Interface', 'Responsive Design']
+    favSubjects: ['User Interface', 'Responsive Design'],
+    grade: 60
 });
 
 const patrick = new ProjectManagers({
@@ -127,3 +137,9 @@ neil.PRAssignment('Advanced CSS');
 virginia.sprintChallenge('Responsive Design');
 shawn.debugsCode(neil, 'Flexbox');
 patrick.standUp('web17_help');
+fred.adjustgrade(neil);
+patrick.adjustgrade(neil);
+shawn.adjustgrade(neil);
+jonathan.adjustgrade(neil);
+virginia.graduate();
+neil.graduate();
